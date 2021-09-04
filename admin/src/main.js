@@ -14,10 +14,10 @@ import './icons' // icon
 
 import * as filters from './filters' // global filters
 
-Vue.prototype.$ELEMENT = { size: Cookies.get('size') || 'medium' };
+Vue.prototype.$ELEMENT = { size: Cookies.get('size') || 'medium' }
 
 Object.keys(filters).forEach(key => {
-    Vue.filter(key, filters[key])
+  Vue.filter(key, filters[key])
 })
 
 Vue.config.productionTip = false

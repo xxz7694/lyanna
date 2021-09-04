@@ -76,120 +76,120 @@ import Dropdown from '@/components/Dropdown'
 import { fetchPost, updatePost, createPost, userSearch, fetchTags } from '#/api'
 
 const defaultForm = {
-    id: undefined,
-    title: '',
-    slug: '',
-    summary: '',
-    content: '',
-    is_page: false,
-    can_comment: true,
-    author_id: '',
-    tags: [],
-    status: "1"
+  id: undefined,
+  title: '',
+  slug: '',
+  summary: '',
+  content: '',
+  is_page: false,
+  can_comment: true,
+  author_id: '',
+  tags: [],
+  status: '1'
 }
 
 export default {
-    name: 'PostDetail',
-    components: { MarkdownEditor, MDinput, Sticky, Dropdown },
-    props: {
-        isEdit: {
-            type: Boolean,
-            default: false
-        }
-    },
-    data() {
-        const validateRequire = (rule, value, callback) => {
-            if (value === '') {
-                this.$message({
-                    message: rule.field + '为必传项',
-                    type: 'error'
-                })
-                callback(new Error(rule.field + '为必传项'))
-            } else {
-                callback()
-            }
-        }
-
-        return {
-            postForm: Object.assign({}, defaultForm),
-            loading: false,
-            userListOptions: [],
-            tagListOptions: [],
-            rules: {
-                title: [{ validator: validateRequire }],
-                content: [{ validator: validateRequire }]
-            },
-            tempRoute: {}
-        }
-    },
-    created() {
-        if (this.isEdit) {
-            const id = this.$route.params && this.$route.params.id
-            this.fetchData(id)
-        } else {
-            this.postForm = Object.assign({}, defaultForm)
-        }
-
-        this.tempRoute = Object.assign({}, this.$route)
-
-        fetchTags().then(response => {
-            this.tagListOptions = response.data.items
-        }).catch(err => {
-            console.log(err)
-        })
-    },
-    methods: {
-        fetchData(id) {
-            fetchPost(id).then(response => {
-                this.postForm = response.data
-                this.userListOptions = [response.data.author]
-                this.setTagsViewTitle()
-            }).catch(err => {
-                console.log(err)
-            })
-        },
-        setTagsViewTitle() {
-            const title = '编辑文章'
-            const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.id}` })
-            this.$store.dispatch('updateVisitedView', route)
-        },
-        getRemoteUserList(query) {
-            userSearch(query).then(response => {
-                if (!response.data.items) return
-                this.userListOptions = response.data.items
-            })
-        },
-        submitForm() {
-            this.$refs.postForm.validate(valid => {
-                if (valid) {
-                    this.loading = true
-                    let promise
-                    if (this.isEdit) {
-                        let id = this.postForm.id
-                        promise = updatePost(id, this.postForm)
-                    } else {
-                        promise = createPost(this.postForm)
-                    }
-                    let self = this;
-                    promise.then(() => {
-                        self.$notify({
-                            title: '成功',
-                            message: '文章处理成功',
-                            type: 'success',
-                            duration: 2000
-                        })
-                        this.loading = false
-                        this.$router.push('/post/list?refresh=1')
-                    }).catch(err => {
-                        console.log(err)
-                    })
-                } else {
-                    console.log('error submit!!')
-                    return false
-                }
-            })
-        }
+  name: 'PostDetail',
+  components: { MarkdownEditor, MDinput, Sticky, Dropdown },
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    const validateRequire = (rule, value, callback) => {
+      if (value === '') {
+        this.$message({
+          message: rule.field + '为必传项',
+          type: 'error'
+        })
+        callback(new Error(rule.field + '为必传项'))
+      } else {
+        callback()
+      }
+    }
+
+    return {
+      postForm: Object.assign({}, defaultForm),
+      loading: false,
+      userListOptions: [],
+      tagListOptions: [],
+      rules: {
+        title: [{ validator: validateRequire }],
+        content: [{ validator: validateRequire }]
+      },
+      tempRoute: {}
+    }
+  },
+  created () {
+    if (this.isEdit) {
+      const id = this.$route.params && this.$route.params.id
+      this.fetchData(id)
+    } else {
+      this.postForm = Object.assign({}, defaultForm)
+    }
+
+    this.tempRoute = Object.assign({}, this.$route)
+
+    fetchTags().then(response => {
+      this.tagListOptions = response.data.items
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  methods: {
+    fetchData (id) {
+      fetchPost(id).then(response => {
+        this.postForm = response.data
+        this.userListOptions = [response.data.author]
+        this.setTagsViewTitle()
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    setTagsViewTitle () {
+      const title = '编辑文章'
+      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.id}` })
+      this.$store.dispatch('updateVisitedView', route)
+    },
+    getRemoteUserList (query) {
+      userSearch(query).then(response => {
+        if (!response.data.items) return
+        this.userListOptions = response.data.items
+      })
+    },
+    submitForm () {
+      this.$refs.postForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          let promise
+          if (this.isEdit) {
+            const id = this.postForm.id
+            promise = updatePost(id, this.postForm)
+          } else {
+            promise = createPost(this.postForm)
+          }
+          const self = this
+          promise.then(() => {
+            self.$notify({
+              title: '成功',
+              message: '文章处理成功',
+              type: 'success',
+              duration: 2000
+            })
+            this.loading = false
+            this.$router.push('/post/list?refresh=1')
+          }).catch(err => {
+            console.log(err)
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    }
+  }
 }
 </script>
 

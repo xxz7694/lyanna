@@ -9,16 +9,16 @@ import screenfull from 'screenfull'
 
 export default {
   name: 'Screenfull',
-  data() {
+  data () {
     return {
       isFullscreen: false
     }
   },
-  mounted() {
+  mounted () {
     this.init()
   },
   methods: {
-    click() {
+    click () {
       if (!screenfull.enabled) {
         this.$message({
           message: 'you browser can not work',
@@ -28,7 +28,7 @@ export default {
       }
       screenfull.toggle()
     },
-    init() {
+    init () {
       if (screenfull.enabled) {
         screenfull.on('change', () => {
           this.isFullscreen = screenfull.isFullscreen

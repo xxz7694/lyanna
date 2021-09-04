@@ -62,7 +62,7 @@ export default {
   name: 'PostList',
   components: { Pagination },
   filters: {
-    statusFilter(status) {
+    statusFilter (status) {
       const statusMap = {
         1: 'online',
         0: 'unpublished'
@@ -70,7 +70,7 @@ export default {
       return statusMap[status]
     }
   },
-  data() {
+  data () {
     return {
       list: null,
       total: 0,
@@ -82,11 +82,11 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.getList()
   },
   methods: {
-    getList() {
+    getList () {
       this.listLoading = true
       getPostList(this.listQuery).then(response => {
         this.list = response.data.items
@@ -94,15 +94,15 @@ export default {
         this.listLoading = false
       })
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       this.listQuery.limit = val
       this.getList()
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.listQuery.page = val
       this.getList()
     },
-    switchStatus(row) {
+    switchStatus (row) {
       const statusMap = {
         1: 'POST',
         0: 'DELETE'
@@ -110,11 +110,11 @@ export default {
       updatePostStatus(row.id, statusMap[row.status]).then(response => {
         if (!response.data.r) {
           row.status = !row.status
-          this.$message.error('切换状态失败!');
+          this.$message.error('切换状态失败!')
         }
       })
     },
-    deletePost(index, row) {
+    deletePost (index, row) {
       this.$confirm('此操作将永久删除这篇文章, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -125,13 +125,13 @@ export default {
             this.$message({
               type: 'success',
               message: '删除成功!'
-            });
+            })
             this.list.splice(index, 1)
           }
         })
       }).catch(() => {
         console.log('Cancel!')
-      });
+      })
     }
   }
 }

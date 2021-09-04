@@ -49,18 +49,18 @@ import { getUserList } from '#/api'
 
 export default {
   name: 'UserList',
-  data() {
+  data () {
     return {
       list: null,
       total: 0,
       listLoading: true
     }
   },
-  created() {
+  created () {
     this.getList()
   },
   methods: {
-    getList() {
+    getList () {
       this.listLoading = true
       getUserList().then(response => {
         this.list = response.data.items

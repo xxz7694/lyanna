@@ -36,10 +36,10 @@ export default {
   },
   computed: {
     enabled: {
-      get() {
+      get () {
         return this.value
       },
-      set(val) {
+      set (val) {
         this.$emit('input', val)
       }
     }

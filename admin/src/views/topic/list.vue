@@ -58,7 +58,7 @@ import { getTopicList, updateTopicStatus } from '#/api'
 export default {
   name: 'SpecialTopics',
   filters: {
-    statusFilter(status) {
+    statusFilter (status) {
       const statusMap = {
         1: 'online',
         0: 'unpublished'
@@ -66,18 +66,18 @@ export default {
       return statusMap[status]
     }
   },
-  data() {
+  data () {
     return {
       list: null,
       total: 0,
       listLoading: true
     }
   },
-  created() {
+  created () {
     this.getList()
   },
   methods: {
-    getList() {
+    getList () {
       this.listLoading = true
       getTopicList().then(response => {
         this.list = response.data.items
@@ -85,7 +85,7 @@ export default {
         this.listLoading = false
       })
     },
-    switchStatus(row) {
+    switchStatus (row) {
       const statusMap = {
         1: 'POST',
         0: 'DELETE'
@@ -93,7 +93,7 @@ export default {
       updateTopicStatus(row.id, statusMap[row.status]).then(response => {
         if (!response.data.r) {
           row.status = !row.status
-          this.$message.error('切换状态失败!');
+          this.$message.error('切换状态失败!')
         }
       })
     }

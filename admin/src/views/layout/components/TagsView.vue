@@ -30,30 +30,30 @@ import { constantRouterMap } from '@/router'
 import path from 'path'
 
 export default {
-    components: { ScrollPane },
-    data() {
-        return {
-            visible: false,
-            top: 0,
-            left: 0,
-            selectedTag: {},
-            affixTags: []
-        }
+  components: { ScrollPane },
+  data () {
+    return {
+      visible: false,
+      top: 0,
+      left: 0,
+      selectedTag: {},
+      affixTags: []
+    }
+  },
+  computed: {
+    visitedViews () {
+      return this.$store.state.tagsView.visitedViews
     },
-    computed: {
-        visitedViews() {
-            return this.$store.state.tagsView.visitedViews
-    },
-    routers() {
+    routers () {
       return constantRouterMap
     }
   },
   watch: {
-    $route() {
+    $route () {
       this.addTags()
       this.moveToCurrentTag()
     },
-    visible(value) {
+    visible (value) {
       if (value) {
         document.body.addEventListener('click', this.closeMenu)
       } else {
@@ -61,15 +61,15 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.initTags()
     this.addTags()
   },
   methods: {
-    isActive(route) {
+    isActive (route) {
       return route.path === this.$route.path
     },
-    filterAffixTags(routes, basePath = '/') {
+    filterAffixTags (routes, basePath = '/') {
       let tags = []
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
@@ -89,7 +89,7 @@ export default {
 
       return tags
     },
-    initTags() {
+    initTags () {
       const affixTags = this.affixTags = this.filterAffixTags(this.routers)
       for (const tag of affixTags) {
         // Must have tag name
@@ -98,14 +98,14 @@ export default {
         }
       }
     },
-    addTags() {
+    addTags () {
       const { name } = this.$route
       if (name) {
         this.$store.dispatch('addView', this.$route)
       }
       return false
     },
-    moveToCurrentTag() {
+    moveToCurrentTag () {
       const tags = this.$refs.tag
       this.$nextTick(() => {
         for (const tag of tags) {
@@ -122,7 +122,7 @@ export default {
         }
       })
     },
-    refreshSelectedTag(view) {
+    refreshSelectedTag (view) {
       this.$store.dispatch('delCachedView', view).then(() => {
         const { fullPath } = view
         this.$nextTick(() => {
@@ -132,20 +132,20 @@ export default {
         })
       })
     },
-    closeSelectedTag(view) {
+    closeSelectedTag (view) {
       this.$store.dispatch('delView', view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
           this.toLastView(visitedViews)
         }
       })
     },
-    closeOthersTags() {
+    closeOthersTags () {
       this.$router.push(this.selectedTag)
       this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })
     },
-    closeAllTags(view) {
+    closeAllTags (view) {
       this.$store.dispatch('delAllViews').then(({ visitedViews }) => {
         if (this.affixTags.some(tag => tag.path === view.path)) {
           return
@@ -153,7 +153,7 @@ export default {
         this.toLastView(visitedViews)
       })
     },
-    toLastView(visitedViews) {
+    toLastView (visitedViews) {
       const latestView = visitedViews.slice(-1)[0]
       if (latestView) {
         this.$router.push(latestView)
@@ -162,7 +162,7 @@ export default {
         this.$router.push('/')
       }
     },
-    openMenu(tag, e) {
+    openMenu (tag, e) {
       const menuMinWidth = 105
       const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
       const offsetWidth = this.$el.offsetWidth // container width
@@ -179,7 +179,7 @@ export default {
       this.visible = true
       this.selectedTag = tag
     },
-    closeMenu() {
+    closeMenu () {
       this.visible = false
     }
   }

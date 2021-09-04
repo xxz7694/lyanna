@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       sizeOptions: [
         { label: 'Default', value: 'default' },
@@ -23,12 +23,12 @@ export default {
     }
   },
   computed: {
-    size() {
+    size () {
       return this.$store.getters.size
     }
   },
   methods: {
-    handleSetSize(size) {
+    handleSetSize (size) {
       this.$ELEMENT.size = size
       this.$store.dispatch('setSize', size)
       this.refreshView()
@@ -37,7 +37,7 @@ export default {
         type: 'success'
       })
     },
-    refreshView() {
+    refreshView () {
       // In order to make the cached page re-rendered
       this.$store.dispatch('delAllCachedViews', this.$route)
 

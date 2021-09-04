@@ -84,7 +84,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     const validateRequire = (rule, value, callback) => {
       if (value === '') {
         this.$message({
@@ -107,10 +107,10 @@ export default {
       tempRoute: {},
       imagecropperShow: false,
       imagecropperKey: 0,
-      image: '',
+      image: ''
     }
   },
-  created() {
+  created () {
     if (this.isEdit) {
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
@@ -121,7 +121,7 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
-    fetchData(id) {
+    fetchData (id) {
       fetchUser(id).then(response => {
         this.userForm = response.data
         this.userForm.password = ''
@@ -133,29 +133,29 @@ export default {
         console.log(err)
       })
     },
-    setTagsViewTitle() {
+    setTagsViewTitle () {
       const title = '编辑用户'
       const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.userForm.id}` })
       this.$store.dispatch('updateVisitedView', route)
     },
-    cropSuccess(resData) {
+    cropSuccess (resData) {
       this.imagecropperShow = false
       this.imagecropperKey = this.imagecropperKey + 1
       this.image = resData.files.avatar
       this.userForm.avatar = resData.files.avatar_path
     },
-    submitForm() {
+    submitForm () {
       this.$refs.userForm.validate(valid => {
         if (valid) {
           this.loading = true
           let promise
           if (this.isEdit) {
-            let id = this.userForm.id
+            const id = this.userForm.id
             promise = updateUser(id, this.userForm)
           } else {
             promise = createUser(this.userForm)
           }
-          let self = this;
+          const self = this
           promise.then(() => {
             self.$notify({
               title: '成功',

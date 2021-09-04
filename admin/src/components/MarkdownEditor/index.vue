@@ -24,15 +24,15 @@ export default {
     }
   },
   computed: {
-    compiledMarkdown() {
+    compiledMarkdown () {
       return marked(this.value)
     },
-    editorHeight() {
+    editorHeight () {
       return this.height
-    },
+    }
   },
   methods: {
-    update() {
+    update () {
       debounce((e) => {
         this.value = e.target.value
       }, 300)

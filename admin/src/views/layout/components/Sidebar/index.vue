@@ -20,7 +20,7 @@ import { constantRouterMap } from '@/router'
 import variables from '@/styles/variables.scss'
 
 export default {
-  data() {
+  data () {
     return {
       routes: constantRouterMap
     }
@@ -30,10 +30,10 @@ export default {
     ...mapGetters([
       'sidebar'
     ]),
-    variables() {
+    variables () {
       return variables
     },
-    isCollapse() {
+    isCollapse () {
       return !this.sidebar.opened
     }
   }

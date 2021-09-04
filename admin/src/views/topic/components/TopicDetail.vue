@@ -56,12 +56,12 @@ import DndList from '@/components/DndList'
 import { fetchTopic, updateTopic, createTopic, getPostList } from '#/api'
 
 const defaultForm = {
-    status: '1',
-    title: '',
-    intro: '',
-    slug: '',
-    id: undefined,
-    posts: []
+  status: '1',
+  title: '',
+  intro: '',
+  slug: '',
+  id: undefined,
+  posts: []
 }
 
 export default {
@@ -73,7 +73,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     const validateRequire = (rule, value, callback) => {
       if (value === '') {
         this.$message({
@@ -97,29 +97,29 @@ export default {
       allPosts: []
     }
   },
-  created() {
-    let params = {page: 1, limit: 1000}
+  created () {
+    const params = { page: 1, limit: 1000 }
     if (this.isEdit) {
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
-      params['special_id'] = id
+      params.special_id = id
     } else {
       // FIXME
       this.topicForm.posts = []
     }
 
     getPostList(params).then(response => {
-            this.allPosts = response.data.items.map(p => {
-              return {'id': p.id, 'title': p.title}
-            })
-        }).catch(err => {
-            console.log(err)
-        })
+      this.allPosts = response.data.items.map(p => {
+        return { id: p.id, title: p.title }
+      })
+    }).catch(err => {
+      console.log(err)
+    })
 
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
-    fetchData(id) {
+    fetchData (id) {
       fetchTopic(id).then(response => {
         this.topicForm = response.data
         this.setTagsViewTitle()
@@ -127,25 +127,25 @@ export default {
         console.log(err)
       })
     },
-    setTagsViewTitle() {
+    setTagsViewTitle () {
       const title = '编辑专题'
       const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.topicForm.id}` })
       this.$store.dispatch('updateVisitedView', route)
     },
-    submitForm() {
+    submitForm () {
       this.$refs.topicForm.validate(valid => {
         if (valid) {
           this.loading = true
           let promise
-          let form = Object.assign({}, this.topicForm)
+          const form = Object.assign({}, this.topicForm)
           delete form.n_posts
           if (this.isEdit) {
-            let id = form.id
+            const id = form.id
             promise = updateTopic(id, form)
           } else {
             promise = createTopic(form)
           }
-          let self = this;
+          const self = this
           promise.then(() => {
             self.$notify({
               title: '成功',
