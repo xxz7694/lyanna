@@ -69,10 +69,10 @@
 </template>
 
 <script>
-import MarkdownEditor from '@/components/MarkdownEditor'
-import MDinput from '@/components/MDinput'
-import Sticky from '@/components/Sticky'
-import Dropdown from '@/components/Dropdown'
+import MarkdownEditor from '@/../admin/components/MarkdownEditor'
+import MDinput from '@/../admin/components/MDinput'
+import Sticky from '@/../admin/components/Sticky'
+import Dropdown from '@/../admin/components/Dropdown'
 import { fetchPost, updatePost, createPost, userSearch, fetchTags } from '#/api'
 
 const defaultForm = {
@@ -194,7 +194,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import "~@/styles/mixin.scss";
+@import "@/../admin/styles/mixin.scss";
 .createPost-container {
   position: relative;
   .createPost-main-container {

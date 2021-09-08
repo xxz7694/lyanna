@@ -56,7 +56,7 @@
 
 <script>
 import { getPostList, updatePostStatus, deletePost } from '#/api'
-import Pagination from '@/components/Pagination'
+import Pagination from '@/../admin/components/Pagination'
 
 export default {
   name: 'PostList',

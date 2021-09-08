@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import MDinput from '@/components/MDinput'
-import Dropdown from '@/components/Dropdown'
-import Sticky from '@/components/Sticky'
-import DndList from '@/components/DndList'
+import MDinput from '@/../admin/components/MDinput'
+import Dropdown from '@/../admin/components/Dropdown'
+import Sticky from '@/../admin/components/Sticky'
+import DndList from '@/../admin/components/DndList'
 import { fetchTopic, updateTopic, createTopic, getPostList } from '#/api'
 
 const defaultForm = {
@@ -171,7 +171,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import "~@/styles/mixin.scss";
+@import "@/../admin/styles/mixin.scss";
 .createTopic-container {
   position: relative;
   .createTopic-main-container {

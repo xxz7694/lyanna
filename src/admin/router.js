@@ -2,19 +2,19 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import store from '#/store'
-import Layout from '@/views/layout/Layout'
+import Layout from './views/layout/Layout'
 import { getToken } from '#/utils/auth'
 
-import Home from '@/views/home'
-import CreateUser from '@/views/user/create'
-import EditUser from '@/views/user/edit'
-import UserList from '@/views/user/list'
-import CreatePost from '@/views/post/create'
-import EditPost from '@/views/post/edit'
-import PostList from '@/views/post/list'
-import CreateTopic from '@/views/topic/create'
-import EditTopic from '@/views/topic/edit'
-import TopicList from '@/views/topic/list'
+import Home from './views/home'
+import CreateUser from './views/user/create'
+import EditUser from './views/user/edit'
+import UserList from './views/user/list'
+import CreatePost from './views/post/create'
+import EditPost from './views/post/edit'
+import PostList from './views/post/list'
+import CreateTopic from './views/topic/create'
+import EditTopic from './views/topic/edit'
+import TopicList from './views/topic/list'
 
 Vue.use(Router)
 const whiteList = ['/login']
@@ -27,14 +27,14 @@ export const constantRouterMap = [
     children: [
       {
         path: '/redirect/:path*',
-        component: () => import('@/views/redirect/index')
+        component: () => import('./views/redirect/index')
       }
     ]
   },
   {
     name: 'login',
     path: '/login',
-    component: () => import('@/views/login'),
+    component: () => import('./views/login'),
     hidden: true
   },
   {
@@ -145,7 +145,7 @@ export const constantRouterMap = [
   },
   {
     path: '/404',
-    component: () => import('@/views/errorPage/404'),
+    component: () => import('./views/errorPage/404'),
     hidden: true
   },
   { path: '*', redirect: '/404', hidden: true }

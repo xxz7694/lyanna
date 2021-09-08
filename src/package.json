@@ -1,0 +1,78 @@
+{
+  "name": "vue-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve:admin": "vue-cli-service serve admin/main.js",
+    "serve:activity": "vue-cli-service serve activity/main.js",
+    "build:admin": "vue-cli-service build --dest dist/admin admin/main.js",
+    "build:activity": "vue-cli-service build --dest dist/activity activity/main.js",
+    "lint": "vue-cli-service lint",
+    "svgo": "svgo -f admin/icons/svg --config=admin/icons/svgo.yml"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "element-plus": "^1.1.0-beta.9",
+    "eslint-webpack-plugin": "^3.0.1",
+    "fuse.js": "^6.4.6",
+    "lodash": "^4.17.21",
+    "marked": "^3.0.2",
+    "normalize.css": "^8.0.1",
+    "qs": "^6.10.1",
+    "sass": "^1.39.0",
+    "sass-loader": "10.1.1",
+    "screenfull": "^5.1.0",
+    "vue": "^3.2.8",
+    "vue-class-component": "^7.2.6",
+    "vue-router": "^3.5.2",
+    "vuedraggable": "^2.24.3",
+    "vuex": "^3.6.2",
+    "webpack": "^5.52.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
+    "@vue/compiler-sfc": "^3.2.9",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^7.17.0",
+    "js-cookie": "^3.0.1",
+    "svg-sprite-loader": "^6.0.9",
+    "svgo": "^2.5.0",
+    "vue-cli-plugin-element": "^1.0.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "@vue/standard"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "ecmaFeatures": {
+        "legacyDecorators": true
+      }
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

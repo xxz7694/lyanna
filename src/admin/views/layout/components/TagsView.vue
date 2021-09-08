@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import ScrollPane from '@/components/ScrollPane'
-import { constantRouterMap } from '@/router'
+import ScrollPane from '@/../admin/components/ScrollPane'
+import { constantRouterMap } from '@/../admin/router'
 import path from 'path'
 
 export default {

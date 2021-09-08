@@ -16,8 +16,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
-import { constantRouterMap } from '@/router'
-import variables from '@/styles/variables.scss'
+import { constantRouterMap } from '@/../admin/router'
+import variables from '@/../admin/styles/variables.scss'
 
 export default {
   data () {

@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import MDinput from '@/components/MDinput'
-import Sticky from '@/components/Sticky'
-import ImageCropper from '@/components/ImageCropper'
+import MDinput from '@/../admin/components/MDinput'
+import Sticky from '@/../admin/components/Sticky'
+import ImageCropper from '@/../admin/components/ImageCropper'
 import { fetchUser, updateUser, createUser } from '#/api'
 
 const defaultForm = {
@@ -182,7 +182,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import "~@/styles/mixin.scss";
+@import "@/../admin/styles/mixin.scss";
 .createPost-container {
   position: relative;
   .createPost-main-container {
