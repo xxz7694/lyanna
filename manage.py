@@ -130,30 +130,35 @@ def cli():
 
 
 @cli.command()
+@click.pass_context
 def initdb():
     run_async(init())
     click.echo('Init Finished!')
 
 
 @cli.command()
+@click.pass_context
 def migrate_for_v25():
     run_async(_migrate_for_v25())
     click.echo('Migrate Finished!')
 
 
 @cli.command()
+@click.pass_context
 def migrate_for_v27():
     run_async(_migrate_for_v27())
     click.echo('Migrate Finished!')
 
 
 @cli.command()
+@click.pass_context
 def migrate_for_v30():
     run_async(_migrate_for_v30())
     click.echo('Migrate Finished!')
 
 
 @cli.command()
+@click.pass_context
 def migrate_for_v35():
     run_async(_migrate_for_v35())
     click.echo('Migrate Finished!')
