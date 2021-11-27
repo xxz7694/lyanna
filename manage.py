@@ -130,7 +130,7 @@ def cli():
 
 
 @cli.command()
-def initdb():
+def init_db():
     run_async(init())
     click.echo('Init Finished!')
 
