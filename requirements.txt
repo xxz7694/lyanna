@@ -24,5 +24,3 @@ sanic-routing==0.7.1
 sanic-sentry==0.1.7
 sanic-session==0.8.0
 Sanic-WTF==0.6.0
--e git+https://github.com/dongweiming/sanic-oauth.git@master#egg=sanic-oauth
--e git+https://github.com/dongweiming/aiomysql.git@python38#egg=aiomysql
