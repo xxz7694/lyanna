@@ -136,7 +136,7 @@ async def post(request, post_id):
 
     post = await Post.get_or_404(id=post_id)
     if not (post := await Post.get_or_404(id=post_id)):
-        return response.json({'r': 0, 'msg': 'Post not exist'})
+        return json({'r': 0, 'msg': 'Post not exist'})
 
     if request.method == 'DELETE':
         await post.delete()
@@ -144,7 +144,7 @@ async def post(request, post_id):
         activity = await Activity.filter(target_id=post_id, target_kind=K_POST).first()
         if activity:
             await activity.delete()
-        return response.json({'r': 1})
+        return json({'r': 1})
 
     rv = await post.to_sync_dict()
     rv['tags'] = [t.name for t in rv['tags']]
@@ -255,13 +255,13 @@ async def status(request, target_kind, target_id):
         abort(404)
     kls = Post if target_kind == 'post' else SpecialTopic
     if not (obj := await kls.get(id=target_id)):
-        return response.json({'r': 0, 'msg': 'item not exist'})
+        return json({'r': 0, 'msg': 'item not exist'})
     if request.method == 'POST':
         obj.status = kls.STATUS_ONLINE
     elif request.method == 'DELETE':
         obj.status = kls.STATUS_UNPUBLISHED
     await obj.save()
-    return response.json({'r': 1})
+    return json({'r': 1})
 
 
 @bp.route('/api/user/search')
@@ -270,7 +270,7 @@ async def user_search(request: Request) -> HTTPResponse:
     name = request.args.get('name')
 
     users = await User.sync_all()
-    return response.json({
+    return json({
         'items': [{'id': u.id, 'name': u.name}
                   for u in users if name is None or name in u.name]
     })
@@ -280,9 +280,7 @@ async def user_search(request: Request) -> HTTPResponse:
 @protected(bp)
 async def list_tags(request: Request) -> HTTPResponse:
     tags = await Tag.sync_all()
-    return response.json({
-        'items': [t.name for t in tags]
-    })
+    return json({'items': [t.name for t in tags]})
 
 
 @bp.route('/api/topics')
@@ -290,7 +288,7 @@ async def list_tags(request: Request) -> HTTPResponse:
 async def list_topics(request: Request) -> HTTPResponse:
     topics = await SpecialTopic.sync_all()
     total = len(topics)
-    return response.json({'items': topics, 'total': total})
+    return json({'items': topics, 'total': total})
 
 
 @bp.route('/api/topic/new', methods=['POST'])
@@ -367,7 +365,7 @@ async def user_info(request: Request) -> HTTPResponse:
             request.app.url_for('static', filename=f'upload/{avatar}')
             if avatar else '')
     }
-    return response.json(data)
+    return json(data)
 
 
 @bp.route('/api/get_url_info', methods=['POST'])

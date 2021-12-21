@@ -20,7 +20,7 @@ class APIJSONEncoder(JSONEncoder):
 def json(body: Dict[str, Any], status: int = 200, headers: Optional[Any] = None,
          content_type: str = "application/json", **kwargs: Any) -> HTTPResponse:
     return HTTPResponse(
-        dumps(body, separators=(",", ":"), cls=APIJSONEncoder, **kwargs),
+        dumps(body, separators=(",", ":"), cls=APIJSONEncoder, default=str, **kwargs),
         headers=headers,
         status=status,
         content_type=content_type,
