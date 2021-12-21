@@ -30,7 +30,7 @@ REACT_PROMPT = '喜欢这篇文章吗? 记得给我留言或订阅哦'
 HERE = Path(__file__).parent.absolute()
 UPLOAD_FOLDER = HERE / 'static/upload'
 OWNER = '钢琴线与小刀'
-SITE_TITLE = '月白'
+SITE_TITLE = '钢琴线与小刀的技术博客'
 PER_PAGE = 10
 GOOGLE_ANALYTICS = ''
 SENTRY_DSN = ''
@@ -51,7 +51,7 @@ MAIL_USERNAME = ''
 MAIL_PASSWORD = ''
 MAKO_STRICT_UNDEFINED = False
 
-BLOG_URL = 'https://example.com'
+BLOG_URL = 'http://enjoycode.icu/'
 
 # Redis sentinel
 REDIS_SENTINEL_SERVICE_HOST = None
